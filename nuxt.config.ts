@@ -1,0 +1,42 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+	compatibilityDate: '2025-05-15',
+	devtools: { enabled: true },
+	css: [
+		'@/assets/css/tailwind.css',
+		'@/assets/styles/main.scss', // глобальные стили, если есть
+	],
+	app: {
+		head: {
+			link: [
+				{
+					rel: 'stylesheet',
+					href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
+				},
+			],
+		},
+	},
+	tailwindcss: {
+		exposeConfig: true,
+		config: {
+			content: [
+				'./components/**/*.{js,vue,ts}',
+				'./layouts/**/*.vue',
+				'./pages/**/*.vue',
+				'./plugins/**/*.{js,ts}',
+				'./app.vue',
+				'./error.vue',
+			],
+		},
+	},
+	modules: ['@nuxt/fonts', '@nuxt/icon', '@nuxt/image', '@nuxtjs/tailwindcss'],
+	nitro: {
+		devProxy: {
+			'/api': {
+				target: 'http://api',
+				changeOrigin: true,
+			},
+		},
+	},
+})
